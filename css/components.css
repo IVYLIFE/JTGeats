@@ -1,0 +1,101 @@
+/* ==============================
+   COMPONENTS.CSS - (UI Elements)
+   ITCSS: Components
+================================= */
+
+/* 🟢 Header & NavBar */
+
+.nav__logo {
+    font-size: 3.2rem;
+    font-family: 'Squada One', sans-serif;
+}
+
+.nav__menu {
+    display: flex;
+    gap: 3rem;
+}
+
+.nav__link {
+    font-size: 1.7rem;
+    padding: 10px;
+}
+
+.nav__link:focus {
+    outline: transparent;
+    color: var(--tertiary-color);
+    border-bottom: 2px solid var(--tertiary-color);
+}
+
+.nav__icons {
+    display: flex;
+    gap: 3rem;
+}
+
+.nav__icons img {
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+}
+
+
+
+
+
+/* 🟢 Hero Section */
+
+#content {
+    max-width: 900px;
+}
+
+.hero__title {
+    font-size: 7rem;
+    font-weight: 400;
+    color: var(--primary-white);
+}
+
+.hero__subtitle {
+    font-size: 1.7rem;
+    margin: 1.5rem 0;
+    max-width: 700px;
+    letter-spacing: 0.4px;
+}
+
+.hero__search {
+    display: flex;
+    border-radius: 8px;
+    width: 640px;
+    overflow: hidden;
+    height: 75px;
+    margin-top: 4rem;
+}
+
+.hero__search-input {
+    flex: 7;
+    padding: 1.5rem 1.8rem;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 8px 0 0 8px;
+}
+
+.hero__search-input::placeholder {
+    color: #929292;
+}
+
+.hero__searchbox {
+    flex: 3;
+    font-size: 1.3rem;
+    background-color: var(--tertiary-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero__illustration{
+    width: 800px;
+
+}
+
+.hero__illustration img {
+    width: 100%;
+}

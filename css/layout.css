@@ -1,0 +1,28 @@
+/* ==============================
+   LAYOUT.CSS - (Structural Rules)
+   ITCSS: Layout
+================================= */
+
+/* 🟢 HEADER & NAVIGATION */
+#header {
+    background: var(--primary-color );
+    padding: 1.5rem 1.5rem 3rem;
+    /* display: none; */
+}
+
+#nav {
+    color: var(--primary-white);
+}
+
+
+/* 🟢 HERO SECTION */
+#hero {
+    background: var(--primary-color );
+    padding: 10rem 0 4rem;
+}
+
+#hero__content {
+    color: var(--primary-white);
+    align-items: flex-start;
+}
+
