@@ -3,26 +3,118 @@
    ITCSS: Layout
 ================================= */
 
-/* 🟢 HEADER & NAVIGATION */
-#header {
-    background: var(--primary-color );
-    padding: 1.5rem 1.5rem 3rem;
-    /* display: none; */
+/* 🟢 HEADER, FOOTER & NAVIGATION */
+#header, #footer {
+    background: var(--primary-color);
+    padding: 1rem 0;
+    width: 100%;
+    /* position: fixed;
+    top: 0;
+    left: 0; */
+    z-index: 1000;
+    transition: transform 0.4s ease-in-out;
 }
 
-#nav {
+#headerNav, #footerNav {
     color: var(--primary-white);
 }
 
 
 /* 🟢 HERO SECTION */
-#hero {
-    background: var(--primary-color );
-    padding: 10rem 0 4rem;
+#heroSection {
+    background: var(--primary-color);
+    padding: 4rem 0;
+    /* padding: 8rem 0; */
+    width: 100%;
+    /* display: none; */
 }
 
 #hero__content {
     color: var(--primary-white);
-    align-items: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* 🟢 KITCHEN SECTION */
+#kitchenSection {
+    padding: 4rem 0;
+    width: 100%;
+    background-color: var(--secondary-white);
+    /* display: none; */
+}
+
+/* 🟢 SLIDER SECTION */
+#sliderSection{
+    padding: 1rem 0;
+    background-color: var(--secondary-white);
+    /* display: none; */
+}
+
+/* 🟢 SERVICE SECTION */
+#serviceSection {
+    padding: 4rem 0;
+    width: 100%;
+    background-color: var(--secondary-white);
+    font-family: var(--font-secondary);
+    position: relative;
+}
+
+/* 🟢 CONTACT US SECTION */
+#contactUsSection{
+    padding: 4rem 0;
+    background-color: var(--secondary-white);
+}
+
+
+/* 🟢 FOOTER SECTION */
+#footerNav{
+    padding-top: 1rem;
+}
+
+#footerNav::after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-white);
+    margin: 1rem 0;
+
+}
+
+
+
+
+@media screen and (min-width: 768px) {
+
+    #heroSection{
+        padding: 8rem 0 4rem;
+        /* padding: 14rem 0 4rem; */
+    }
+    
+    #kitchenSection, #sliderSection, #contactUsSection {
+        padding: 8rem 0 4rem;
+    }
+    
+    #hero__content {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    #header.hide {
+        transform: translateY(-100%);
+    }
+
+    #contactUsSection .container{
+        gap: 4rem;
+    }
+}
+
+
+@media screen and (min-width: 1024px) {
+    #headerNav {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 

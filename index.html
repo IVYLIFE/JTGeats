@@ -6,7 +6,6 @@
     <title>JTGeats - Authentic Home Food</title>
 
     <!-- Font Preloading for Performance -->
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,18 +13,33 @@
       rel="stylesheet"
     />
 
-    <!-- Optimized CSS Files -->
+    <!--=============== REMIXICON ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+
+    <!--=============== CSS ===============-->
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/components.css" />
+
+    <!--=============== ICONS ===============-->
+    <script src="https://kit.fontawesome.com/19e9cb8cb0.js" crossorigin="anonymous"></script>
+  
   </head>
 
   <body>
-    <!-- Header -->
+
+    <!--=============== HEADER ===============-->
     <header id="header">
-      <nav id="nav" class="container center-between">
-        <div class="nav__logo">JTGeats</div>
-        
+      <nav id="headerNav" class="container">
+        <div class="nav__data">
+          <a href="#" class="nav__logo">JTGeats</a>
+
+          <div class="nav__toggle" id="nav-toggle">
+            <i class="ri-menu-line nav__burger"></i>
+            <i class="ri-close-line nav__close"></i>
+          </div>
+        </div>
+
         <ul class="nav__menu">
           <li class="nav__item"><a href="#" class="nav__link">Home</a></li>
           <li class="nav__item"><a href="#" class="nav__link">About</a></li>
@@ -37,32 +51,192 @@
         <div class="nav__icons">
           <img
             class="nav__icon nav__icon--search"
-            src="assets/images/search.png"
+            src="assets/icons/search.png"
           />
-          <img
-            class="nav__icon nav__icon--cart"
-            src="assets//images/cart.png"
-          />
+          <img class="nav__icon nav__icon--cart" src="assets/icons/cart.png" />
         </div>
       </nav>
     </header>
 
-    <section id="hero">
-        <div id="hero__content" class="container center-between">
-            <div id="content" >
-                <h1 class="hero__title">Authentic Home food in India</h1>
-                <p class="hero__subtitle">JTGeats is a courier service in which authentic home cook food is delivered to a customer.</p>
-                <div class="hero__search">
-                    <input type="text" class="hero__search-input" placeholder="Search food you love">
-                    <p class="hero__searchbox">Search</p>
-                </div>
-            </div>
+    <!--============ Hero Section ============-->
+    <section id="heroSection">
+      <div id="hero__content" class="container centerBetween">
+        <div id="hero_description">
+          <h1 class="hero__title">Authentic Home food in India</h1>
+          <p class="hero__subtitle">
+            JTGeats is a courier service in which authentic home cook food is
+            delivered to a customer.
+          </p>
+          <div class="hero__searchbox">
+            <input
+              type="text"
+              class="hero__search-input"
+              placeholder="Search food you love"
+            />
+            <p class="hero__search">Search</p>
+          </div>
+        </div>
 
-            <div class="hero__illustration">
-                <img src="assets/images/hero_image.svg" alt="Illustration of a chef cooking">
-            </div>
-
-        </div>        
+        <div class="hero__illustration">
+          <img
+            src="assets/images/hero_image.svg"
+            alt="Illustration of a chef cooking"
+          />
+        </div>
+      </div>
     </section>
+
+    <!--=============== KITCHEN SECTION ===============-->
+    <section id="kitchenSection">
+      <div class="container">
+        <h2 class="sectionHeading">Home Kitchen</h2>
+        <div class="grid__container" id="gridContainer"></div>
+      </div>
+    </section>
+
+
+    <!--=============== POPULAR ITEMS SECTION ===============-->
+    <section id="sliderSection">
+      <div class="container">
+        
+        <h2 class="sectionHeading">Popular Items</h2>
+
+        <div id="sliderWrapper" class="slider__wrapper">
+          
+          <div class="slider__controls slider__prev">
+            <img
+              src="./assets/icons/chevronFilled.svg"
+              alt="prev"
+              class="slider__icon"
+            />
+          </div>
+
+          <div id="slider"></div>
+
+          <div class="slider__controls slider__next">
+            <img
+              src="./assets/icons/chevronFilled.svg"
+              alt="next"
+              class="slider__icon"
+            />
+          </div>
+        </div>
+
+        <div class="btnContainer">
+          <button class="btn btn__primary">Request a Dish</button>
+        </div>
+
+        
+      </div>
+    </section>
+
+
+    <!--=============== SERVICES SECTION ===============-->
+    <section id="serviceSection">
+
+      <div id="serviceContainer" class="container">
+
+          <div class="service__title ">
+            <p>We are providing the best </p>
+            <p>home cooked food delivery service.</p>
+          </div>
+
+          <div class="service__description">
+              <p>Away from home and craving tasty homemade recipes?</p>  
+              <p>Choose from a selection of our delicious home-cooked dishes.</p>
+          </div>
+      
+          <div class="service__divider"></div>
+      
+          <div class="video__container">
+            <video id="serviceVideo" >
+                <source src="./assets/video/media1.mp4" type="video/mp4">
+                <source src="./assets/video/media1.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+            
+            <!-- Custom Play/Pause Button -->
+            <button id="playPauseButton" class="play__button">
+                <img src="./assets/icons/chevron.svg" alt="Play">
+            </button>
+        </div>
+        
+      
+
+    </section>
+
+    
+    <!--=============== CONTACT US SECTION ===============-->
+    <div id="contactUsSection">
+      <div class="container centerBetween">
+        
+        <div class="form__container">
+          
+          <div class="form__title">
+            <p>Do you have a question</p>
+            <p>or want to become a seller?</p>
+          </div>
+          
+          <p class="form_subtitle">Fill this form and our manager will contact you in next 48 hours</p>
+
+          <form action="">
+            <div class="form__group name">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" />
+            </div>
+
+            <div class="form__group email">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" />
+            </div>
+
+            <div class="form__group message">
+              <label for="message">Your Message</label>
+              <textarea id="message" name="message"></textarea>
+            </div>
+
+            <button class="btn btn__primary">Submit</button>
+          </form>
+
+
+        </div>
+
+        <div class="contact__illustration">
+          <img src="./assets/images/illustration_2.svg" alt="Contact Us" />
+        </div>  
+
+      </div>
+    </div>
+
+
+    <!--=============== FOOTER ===============-->
+    <footer id="footer">
+      <nav id="footerNav" class="container">
+        <div class="nav__data">
+          <a href="#" class="nav__logo">JTGeats</a>
+
+        <ul class="nav__menu">
+          <li class="nav__item"><a href="#" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">About</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">Menu</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">Blog</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">Contact</a></li>
+        </ul>
+
+        <div class="nav__icons">
+          <img
+            class="nav__icon nav__icon--facebook"
+            src="assets/icons/facebook.svg"
+          />
+          <img class="nav__icon nav__icon--instagram" src="assets/icons/instagram.svg" />
+        </div>
+      </nav>
+    </header>
+
+    <!--=============== JS ===============-->
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/slider.js"></script>
+  
   </body>
+  
 </html>
