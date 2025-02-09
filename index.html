@@ -13,13 +13,14 @@
       rel="stylesheet"
     />
 
-    <!--=============== REMIXICON ===============-->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+    <!--=============== SWIPER ===============-->
+    <link rel="stylesheet" href="./css/swiper.min.css" />
 
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/modal.css">
 
     <!--=============== ICONS ===============-->
     <script src="https://kit.fontawesome.com/19e9cb8cb0.js" crossorigin="anonymous"></script>
@@ -49,14 +50,18 @@
         </ul>
 
         <div class="nav__icons">
-          <img
-            class="nav__icon nav__icon--search"
-            src="assets/icons/search.png"
-          />
+          <img class="nav__icon nav__icon--search" src="assets/icons/search.png"/>
           <img class="nav__icon nav__icon--cart" src="assets/icons/cart.png" />
         </div>
       </nav>
     </header>
+
+    <!--============= MODAL =============-->
+    <div class="modal__container">
+      <div class="modal__content">
+      </div>
+    </div>
+    
 
     <!--============ Hero Section ============-->
     <section id="heroSection">
@@ -208,7 +213,6 @@
       </div>
     </div>
 
-
     <!--=============== FOOTER ===============-->
     <footer id="footer">
       <nav id="footerNav" class="container">
@@ -231,9 +235,10 @@
           <img class="nav__icon nav__icon--instagram" src="assets/icons/instagram.svg" />
         </div>
       </nav>
-    </header>
+    </footer>
 
     <!--=============== JS ===============-->
+    <script src="./js/swiper.min.js"></script>
     <script type="module" src="./js/main.js"></script>
     <script type="module" src="./js/slider.js"></script>
   

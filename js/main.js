@@ -115,6 +115,15 @@ cardData.slice(0, 12).forEach(card => {
     gridContainer.appendChild(cardElement);
 });
 
+// Add event listener to all "Add to Cart" buttons
+gridContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("add_to_cart")) {
+        const itemName = e.target.dataset.name;
+        const card = cardData.find(c => c.name === itemName);
+        if (card) addToCart(card);
+    }
+});
+
 
 /*=============== SLIDER ===============*/
 const slider = document.getElementById("slider");
@@ -212,3 +221,88 @@ video.addEventListener("pause", () => {
     // videoContainer.classList.remove("video-playing");
     playPauseButton.style.display = "flex";
 });
+
+
+
+/*=============== MODALS ===============*/
+const modalContainer = document.querySelector(".modal__container");
+const modalContent = document.querySelector(".modal__content");
+const cartIcon = document.querySelector(".nav__icon--cart");
+const requestDishBtn = document.querySelector(".btnContainer button");
+
+
+function openModal(content, source) {
+    modalContent.innerHTML = content;
+    modalContent.classList.add(`${source}__modal`);
+    document.body.classList.add("no-scroll");
+    modalContainer.classList.add("show");
+}
+
+function closeModal(source) {
+    console.log(`${source} modal is Closed`)
+    modalContainer.classList.remove("show");
+    document.body.classList.remove("no-scroll");
+}
+
+// 1. Cart Modal
+cartIcon.addEventListener("click", () => {
+    console.log('cartIcon clicked')
+    console.log('Modal for cart is Opened')
+
+    const cartContent = `
+        <img src="./assets/icons/shopping_bag.svg" class="modal__icon" />
+
+        <div class="modal__description">
+        <h2>Cart is Empty</h2>
+        <p>Add some items to the cart to checkout</p>
+        </div>
+        
+        <button id="closeCart" class="btn btn__primary">Back to Menu</button>
+    `;
+    openModal(cartContent, 'cart');
+});
+
+// 2. Request Dish Modal
+requestDishBtn.addEventListener("click", () => {
+
+    console.log('requestDishBtn clicked')
+    console.log('Modal for Request Dish is Opened')
+
+    const requestDishContent = `
+        <div class="modal__title sectionHeading">Request a Dish</div>
+
+        <form action="">
+          <div class="form__group name">
+            <label for="dish_name">Name*</label>
+            <input type="text" required id="dish_name" name="dish_name" placeholder="Enter the name of the Dish" />
+          </div>
+  
+          <div class="form__group email">
+            <label for="image_url">Upload an Image</label>
+            <input type="text" id="image_url" name="image_url" placeholder="Paste a URL" />
+          </div>
+        </form>
+
+        <div class="btn__container">
+          <button id="cancelRequest" class="btn">Cancel</button>
+          <button id="submitRequest" class="btn btn__primary">Submit Request</button>
+        </div>
+    `;
+    openModal(requestDishContent, 'requestDish');
+});
+
+
+document.addEventListener("click", (event) => {
+    if (event.target.id === "closeCart") {
+        closeModal('cart');
+    }
+});
+
+document.addEventListener("click", (event) => {
+    if (event.target.id === "cancelRequest") {
+        closeModal('requestDish');
+    }
+});
+
+
+
