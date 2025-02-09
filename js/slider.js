@@ -16,7 +16,10 @@ function renderSlider() {
         cardElement.classList.add("dish__card", "swiper-slide");
 
         cardElement.innerHTML = `
-            <img src="${card.image}" alt="${card.name}" class="dish__image">
+            <figure class="dish__image-wrapper">
+                <img src="${card.image}" alt="${card.name}" class="dish__image">
+                <figcaption class="visually-hidden">${card.name} - ${card.price}</figcaption>
+            </figure>
             <div class="dish__details">
                 <div class="details">
                     <h3 class="dish__title">${card.name}</h3>
@@ -48,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (sliderWrapper) {
         new Swiper(".swiper", {
-            slidesPerView:3,  // Ensure correct sizing
+            slidesPerView: 3,  // Ensure correct sizing
             spaceBetween: 10,       // Space between slides
             loop: true,             // Enable infinite sliding
             centeredSlides: true,   // Center active slide

@@ -102,7 +102,10 @@ cardData.slice(0, 12).forEach(card => {
     cardElement.classList.add("dish__card");
 
     cardElement.innerHTML = `
-        <img src="${card.image}" alt="${card.name}" class="dish__image">
+        <figure class="dish__image-wrapper">
+            <img src="${card.image}" alt="${card.name}" class="dish__image">
+            <figcaption class="visually-hidden">${card.name} - ${card.price}</figcaption>
+        </figure>
         
         <div class="dish__details">
             
@@ -137,43 +140,6 @@ gridContainer.addEventListener("click", (e) => {
         if (card) addToCart(card);
     }
 });
-
-
-/*=============== SLIDER ===============*/
-// const slider = document.getElementById("slider");
-// const arrowBtns = document.querySelectorAll(".slider__controls");
-
-// const createSlide = (card) => {
-//     let cardElement = document.createElement("div");
-//     cardElement.classList.add("dish__card", "swiper-slide");
-
-//     cardElement.innerHTML = `
-//         <img src="${card.image}" alt="${card.name}" class="dish__image">
-//         <div class="dish__details">
-//             <div class="details">
-//                 <h3 class="dish__title">${card.name}</h3>
-//                 <p class="dish__price">${card.price}</p>
-//             </div>
-//             <div class="details details_2">
-//                 <div>
-//                     <p class="dish__rating">
-//                         <i class="fa-solid fa-star">&nbsp;</i>
-//                         ${card.rating}
-//                     </p>
-//                     <p class="dish__duration">${card.duration}</p>
-//                 </div>
-//                 <img class="add_to_cart" src="./assets/icons/add_to_cart.png" />
-//             </div>
-//         </div>
-//         ${card.discount && card.discount !== "0%" ? `<p class="dish__discount">${card.discount}</p>` : ""}
-//     `;
-//     return cardElement;
-// };
-
-// // Append slides dynamically
-// cardData.forEach(card => {
-//     slider.appendChild(createSlide(card));
-// });
 
 
 /*=============== VIDEO ===============*/
