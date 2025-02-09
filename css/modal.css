@@ -118,4 +118,10 @@
     flex-direction: row;
     gap: 2rem;
   }
+
+  .cart__modal .modal__icon{
+    width: 150px;
+  }
 }
+
+

@@ -1,50 +1,19 @@
 import { cardData } from "../assets/data.js";
+import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
 
 const slider = document.getElementById("slider");
 const sliderNextButton = document.querySelector(".slider__next");
 const sliderPrevButton = document.querySelector(".slider__prev");
 
-
 if (!sliderNextButton) console.warn("Warning: .slider__next button not found!");
 if (!sliderPrevButton) console.warn("Warning: .slider__prev button not found!");
 
-let currentIndex = 0;
-let isAnimating = false;
-let visibleSlides = getVisibleSlides();
-
-function getVisibleSlides() {
-    if (window.innerWidth >= 1024) return 3; // Large screens
-    if (window.innerWidth >= 768) return 2;  // Medium screens
-    return 1;                                // Small screens
-}
-
-// Debounce function to limit the rate of function execution
-function debounce(func, wait) {
-    let timeout;
-    return function(...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-}
-
-// Update the visible slides on window resize
-window.addEventListener("resize", debounce(() => {
-    visibleSlides = getVisibleSlides();
-    renderSlider(); 
-}, 200));
-
-function renderSlider(isInitial = false) {
+function renderSlider() {
     slider.innerHTML = ""; // Clear old slides
 
-    for (let i = 0; i < visibleSlides; i++) {
-        let index = (currentIndex + i) % cardData.length;
-        if (index < 0) index += cardData.length;
-
-        const card = cardData[index];
+    cardData.forEach((card) => {
         const cardElement = document.createElement("article");
-        cardElement.classList.add("dish__card");
-
-        if (i === Math.floor(visibleSlides / 2)) cardElement.classList.add("active__slide");
+        cardElement.classList.add("dish__card", "swiper-slide");
 
         cardElement.innerHTML = `
             <img src="${card.image}" alt="${card.name}" class="dish__image">
@@ -68,43 +37,39 @@ function renderSlider(isInitial = false) {
         `;
 
         slider.appendChild(cardElement);
+    });
+}
+
+// Ensure DOM is loaded before initializing Swiper
+document.addEventListener("DOMContentLoaded", function () {
+    renderSlider();
+
+    const sliderWrapper = document.querySelector(".swiper");
+
+    if (sliderWrapper) {
+        new Swiper(".swiper", {
+            slidesPerView:3,  // Ensure correct sizing
+            spaceBetween: 10,       // Space between slides
+            loop: true,             // Enable infinite sliding
+            centeredSlides: true,   // Center active slide
+            navigation: {
+                nextEl: ".slider__next",
+                prevEl: ".slider__prev",
+            },
+            breakpoints: {
+                1024: {
+                    slidesPerView: 3,
+                },
+                768: {
+                    slidesPerView: 2,
+                },
+                0: {
+                    slidesPerView: 1,
+                    navigation: false, // Disable controls for small screens
+                },
+            },
+        });
+    } else {
+        console.error("Swiper container not found!");
     }
-}
-
-function slide(direction) {
-    if (isAnimating) return;
-    isAnimating = true;
-
-    const offset = direction === "next" ? "-100%" : "100%";
-    
-    // Move all slides in the selected direction
-    slider.style.transition = "transform 0.5s ease-in-out";
-    slider.style.transform = `translateX(${offset})`;
-
-    setTimeout(() => {
-        // Reset position
-        slider.style.transition = "none";
-        slider.style.transform = "translateX(0)";
-
-        // Update the index
-        currentIndex = direction === "next" ? 
-            (currentIndex + 1) % cardData.length : 
-            (currentIndex - 1 + cardData.length) % cardData.length;
-
-        renderSlider(); // Re-render without animation classes
-
-        isAnimating = false;
-    }, 500); // Match the transition time
-}
-
-// Button actions
-if (sliderNextButton) {
-    sliderNextButton.addEventListener("click", () => slide("next"));
-}
-
-if (sliderPrevButton) {
-    sliderPrevButton.addEventListener("click", () => slide("prev"));
-}
-
-// Initial render (without animations)
-renderSlider(true);
+});

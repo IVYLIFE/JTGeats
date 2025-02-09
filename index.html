@@ -14,6 +14,7 @@
     />
     
     <!--=============== ICONS ===============-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <script src="https://kit.fontawesome.com/19e9cb8cb0.js" crossorigin="anonymous"></script>
 
     <!--=============== CSS ===============-->
@@ -104,27 +105,18 @@
         
         <h2 class="sectionHeading">Popular Items</h2>
 
-        <div id="sliderWrapper" class="slider__wrapper">
-          
+        <div class="sliderContainer">
           <div class="slider__controls slider__prev">
-            <img
-              src="./assets/icons/chevronFilled.svg"
-              alt="prev"
-              class="slider__icon"
-            />
+              <img src="./assets/icons/chevronFilled.svg" alt="prev" class="slider__icon" />
           </div>
-
-          <div id="slider"></div>
-
+          <div id="sliderWrapper" class="swiper">
+              <div id="slider" class="swiper-wrapper"></div>
+          </div>
           <div class="slider__controls slider__next">
-            <img
-              src="./assets/icons/chevronFilled.svg"
-              alt="next"
-              class="slider__icon"
-            />
+              <img src="./assets/icons/chevronFilled.svg" alt="next" class="slider__icon" />
           </div>
-        </div>
-
+      </div>
+        
         <div class="btnContainer">
           <button class="btn btn__primary">Request a Dish</button>
         </div>
@@ -237,6 +229,9 @@
 
     <script type="module" src="./js/main.js"></script>
     <script type="module" src="./js/slider.js"></script>
+    <!-- <script type="module" src="./js/swiper.js"></script> -->
+
+
   
   </body>
   

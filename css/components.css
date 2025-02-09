@@ -21,7 +21,6 @@
     height: 32px;
     cursor: pointer;
     transition: opacity .1s, transform .4s;
-    border: 1px solid red;
     display: flex;
 }
 
@@ -216,12 +215,6 @@
     text-align: center;
 }
 
-#sliderWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
 .slider__controls {
     align-items: center;
     justify-content: center;
@@ -231,7 +224,7 @@
     cursor: pointer;
     border: 3px solid var(--primary-color);
     transition: all 0.3s ease;
-    display: none;
+    display: flex; /* Ensure controls are visible */
 }
 
 .slider__controls:hover {
@@ -248,21 +241,50 @@
 }
 
 #slider {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    width: 1200px;
-    place-items: center;
-    gap: 1.5rem;
+    display: flex; /* Align slides in a row */
+    gap: 1.5rem; /* Space between slides */
     padding: 0.2rem;
+    width: 100%;
+    overflow: visible; /* Ensure all slides are visible */
 }
 
-.active__slide{
+
+#slider .dish__card {
+    flex: 0 0 auto; 
+    max-width: 350px; /* Limit size */
+    transition: transform 0.3s ease-in-out;
+}
+
+
+
+.sliderContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.swiper {
+    overflow: hidden;
+    width: 100%;
+}
+
+.swiper-wrapper {
+    display: flex; /* Ensure slides align properly */
+}
+
+
+.active__slide {
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
+
+/* Responsive Control Visibility */
+@media (max-width: 768px) {
+    .slider__controls {
+        display: none !important;
+    }
+}
+
 
 
 
@@ -447,6 +469,11 @@ textarea {
 
 
 
+
+
+
+
+
 /*=============== BREAKPOINTS ===============*/
 
 @media screen and (min-width: 480px) {
@@ -484,7 +511,6 @@ textarea {
     .btn {
         grid-column: 1 / -1; /* Full width button */
     }
-
 }
 
 @media screen and (min-width: 768px) {
@@ -531,9 +557,6 @@ textarea {
         height: 80px;
     }
 
-    #slider{
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 
 @media screen and (min-width: 900px) {
@@ -542,6 +565,7 @@ textarea {
         grid-template-columns: repeat(3, 1fr);
         gap: 3.5rem 2rem;
     }
+
 }
 
 
@@ -585,10 +609,6 @@ textarea {
 
     .contact__illustration{
         display: block;
-    }
-
-    #slider{
-        grid-template-columns: repeat(3, 1fr);
     }
 
 }
