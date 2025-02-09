@@ -1,12 +1,16 @@
 import { cardData } from "../assets/data.js";
 
 const slider = document.getElementById("slider");
-const sliderNextButton = document.querySelector(".slider__next") || console.warn("Warning: .slider__next button not found!");
-const sliderPrevButton = document.querySelector(".slider__prev") || console.warn("Warning: .slider__prev button not found!");
+const sliderNextButton = document.querySelector(".slider__next");
+const sliderPrevButton = document.querySelector(".slider__prev");
+
+
+if (!sliderNextButton) console.warn("Warning: .slider__next button not found!");
+if (!sliderPrevButton) console.warn("Warning: .slider__prev button not found!");
 
 let currentIndex = 0;
 let isAnimating = false;
-let visibleSlides = getVisibleSlides(); // Initialize with correct number of slides
+let visibleSlides = getVisibleSlides();
 
 function getVisibleSlides() {
     if (window.innerWidth >= 1024) return 3; // Large screens
@@ -14,88 +18,93 @@ function getVisibleSlides() {
     return 1;                                // Small screens
 }
 
-// Recalculate slides on resize
-window.addEventListener("resize", () => {
-    visibleSlides = getVisibleSlides();
-    renderSlider(); // Re-render with the new slide count
-});
+// Debounce function to limit the rate of function execution
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
 
-function renderSlider(direction = "next") {
+// Update the visible slides on window resize
+window.addEventListener("resize", debounce(() => {
+    visibleSlides = getVisibleSlides();
+    renderSlider(); 
+}, 200));
+
+function renderSlider(isInitial = false) {
+    slider.innerHTML = ""; // Clear old slides
+
+    for (let i = 0; i < visibleSlides; i++) {
+        let index = (currentIndex + i) % cardData.length;
+        if (index < 0) index += cardData.length;
+
+        const card = cardData[index];
+        const cardElement = document.createElement("article");
+        cardElement.classList.add("dish__card");
+
+        if (i === Math.floor(visibleSlides / 2)) cardElement.classList.add("active__slide");
+
+        cardElement.innerHTML = `
+            <img src="${card.image}" alt="${card.name}" class="dish__image">
+            <div class="dish__details">
+                <div class="details">
+                    <h3 class="dish__title">${card.name}</h3>
+                    <p class="dish__price">${card.price}</p>
+                </div>
+                <div class="details details_2">
+                    <div>
+                        <p class="dish__rating">
+                            <i class="fa-solid fa-star">&nbsp;</i>
+                            ${card.rating}
+                        </p>
+                        <p class="dish__duration">${card.duration}</p>
+                    </div>
+                    <img class="add_to_cart" src="./assets/icons/add_to_cart.png" alt="Add to cart" />
+                </div>
+            </div>
+            ${card.discount && card.discount !== "0%" ? `<p class="dish__discount">${card.discount}</p>` : ""}
+        `;
+
+        slider.appendChild(cardElement);
+    }
+}
+
+function slide(direction) {
     if (isAnimating) return;
     isAnimating = true;
 
-    // Get all current slides
-    const slides = [...slider.children];
+    const offset = direction === "next" ? "-100%" : "100%";
+    
+    // Move all slides in the selected direction
+    slider.style.transition = "transform 0.5s ease-in-out";
+    slider.style.transform = `translateX(${offset})`;
 
-    // Apply animation before updating
-    slides.forEach((slide) => {
-        slide.classList.add(direction === "next" ? "slide-left" : "slide-right");
-    });
-
-    // Wait for transition to complete
     setTimeout(() => {
-        slider.innerHTML = ""; // Clear slider
+        // Reset position
+        slider.style.transition = "none";
+        slider.style.transform = "translateX(0)";
 
-        for (let i = 0; i < visibleSlides; i++) {
-            let index = (currentIndex + i) % cardData.length;
-            const card = cardData[index];
+        // Update the index
+        currentIndex = direction === "next" ? 
+            (currentIndex + 1) % cardData.length : 
+            (currentIndex - 1 + cardData.length) % cardData.length;
 
-            const cardElement = document.createElement("article");
-            cardElement.classList.add("dish__card");
+        renderSlider(); // Re-render without animation classes
 
-            if (i === Math.floor(visibleSlides / 2)) cardElement.classList.add("active__slide");
-
-            cardElement.innerHTML = `
-                <img src="${card.image}" alt="${card.name}" class="dish__image">
-
-                <div class="dish__details">
-                    <div class="details">
-                        <h3 class="dish__title">${card.name}</h3>
-                        <p class="dish__price">${card.price}</p>
-                    </div>
-
-                    <div class="details details_2">
-                        <div>
-                            <p class="dish__rating">
-                                <i class="fa-solid fa-star">&nbsp;</i>
-                                ${card.rating}
-                            </p>
-                            <p class="dish__duration">${card.duration}</p>
-                        </div>
-                        <img class="add_to_cart" src="./assets/icons/add_to_cart.png" />
-                    </div>
-                </div>
-
-                ${card.discount && card.discount !== "0%" ? `<p class="dish__discount">${card.discount}</p>` : ""}
-            `;
-
-            // New slides start from the opposite side
-            cardElement.classList.add(direction === "next" ? "slide-right" : "slide-left");
-
-            slider.appendChild(cardElement);
-        }
-
-        setTimeout(() => {
-            document.querySelectorAll("#slider.dish").forEach((slide) => {
-                slide.classList.remove("slide-left", "slide-right");
-                slide.classList.add("reset-slide");
-            });
-
-            isAnimating = false;
-        }, 50);
-    }, 500);
+        isAnimating = false;
+    }, 500); // Match the transition time
 }
 
-// // Button actions
-// sliderNextButton.addEventListener("click", () => {
-//     currentIndex = (currentIndex + 1) % cardData.length;
-//     renderSlider("next");
-// });
+// Button actions
+if (sliderNextButton) {
+    sliderNextButton.addEventListener("click", () => slide("next"));
+}
 
-// sliderPrevButton.addEventListener("click", () => {
-//     currentIndex = (currentIndex - 1 + cardData.length) % cardData.length;
-//     renderSlider("prev");
-// });
+if (sliderPrevButton) {
+    sliderPrevButton.addEventListener("click", () => slide("prev"));
+}
 
-// Initial render
-renderSlider();
+// Initial render (without animations)
+renderSlider(true);
