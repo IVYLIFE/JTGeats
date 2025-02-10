@@ -250,9 +250,9 @@
 
 
 #slider .dish__card {
-    flex: 0 0 auto; 
-    max-width: 350px; /* Limit size */
-    transition: transform 0.3s ease-in-out;
+    flex: 0 0 auto;
+    max-width: 300px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 
@@ -274,9 +274,11 @@
 }
 
 
-.active__slide {
+.swiper-slide-active {
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
 
 /* Responsive Control Visibility */
 @media (max-width: 768px) {
@@ -609,6 +611,13 @@ textarea {
 
     .contact__illustration{
         display: block;
+    }
+
+    #slider .dish__card {
+        flex: 0 0 auto;
+        max-width: 300px;
+        min-width: calc(100% / 3 - 30px); 
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     }
 
 }
